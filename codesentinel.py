@@ -70,6 +70,9 @@ class TaintAnalyzer:
         self.filename = filename
         self.env: dict[str, set[str]] = {}
         self.functions: dict[str, ast.FunctionDef | ast.AsyncFunctionDef] = {}
+        # Qualified function name -> enclosing class name (None for module-level).
+        self._function_class: dict[str, str | None] = {}
+        self._class_stack: list[str | None] = []
         self.findings: list[Finding] = []
         self._seen: set[tuple[str, int, int, str, str]] = set()
         self._active_calls: set[str] = set()
@@ -84,6 +87,16 @@ class TaintAnalyzer:
         for node in tree.body:
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 self.functions[node.name] = node
+                self._function_class[node.name] = None
+            elif isinstance(node, ast.ClassDef):
+                # Methods are registered as ``Class.method``. They are reached
+                # through ``self.method(...)`` / ``Class.method(...)`` calls or,
+                # failing that, by the uncalled-function pass.
+                for item in node.body:
+                    if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        qualified = f"{node.name}.{item.name}"
+                        self.functions[qualified] = item
+                        self._function_class[qualified] = node.name
         self._exec_block(tree.body)
         self._analyze_uncalled_functions()
         return list(self.findings)
@@ -133,6 +146,11 @@ class TaintAnalyzer:
 
         if isinstance(node, ast.Call):
             func_name = dotted_name(node.func) or "<dynamic-call>"
+            # For method calls such as ``value.strip()`` or ``input().lower()``
+            # the receiver object is an input to the call as well. Evaluating
+            # it also inspects sinks nested inside it, e.g. ``os.popen(x).read()``.
+            receiver_taint = (self._eval(node.func.value)
+                              if isinstance(node.func, ast.Attribute) else set())
             arg_taints = [self._eval(arg) for arg in node.args]
             kw_taints = [self._eval(kw.value) for kw in node.keywords]
             all_arg_taints = set().union(*arg_taints, *kw_taints) if (arg_taints or kw_taints) else set()
@@ -199,12 +217,15 @@ class TaintAnalyzer:
                     markers.add(f"__SAFE_{context.upper()}__|" + ",".join(sorted(raw_labels)))
                 return markers
 
-            if func_name in self.functions:
-                return self._invoke_function(func_name, node, arg_taints, kw_taints)
+            target, bound = self._resolve_function(func_name)
+            if target is not None:
+                positional = [receiver_taint] + arg_taints if bound else arg_taints
+                return self._invoke_function(target, node, positional, kw_taints)
 
-            # Unknown calls conservatively preserve taint, except known safe
-            # command-quoted values which are not treated as raw taint.
-            return set(all_arg_taints)
+            # Unknown calls (including methods on tainted objects, such as
+            # str.strip/lower/split/format) conservatively preserve the taint
+            # of both their arguments and their receiver.
+            return set(all_arg_taints) | receiver_taint
 
         if isinstance(node, ast.BinOp):
             left = self._eval(node.left)
@@ -294,12 +315,42 @@ class TaintAnalyzer:
             self.env = {}
             self._active_calls.add(name)
             self._return_stack.append(set())
+            self._class_stack.append(self._function_class.get(name))
             try:
                 self._exec_block(fn.body)
             finally:
+                self._class_stack.pop()
                 self._return_stack.pop()
                 self._active_calls.discard(name)
                 self.env = caller_env
+
+    @staticmethod
+    def _decorator_names(fn: ast.FunctionDef | ast.AsyncFunctionDef) -> set[str]:
+        return {name for name in (dotted_name(d) for d in fn.decorator_list) if name}
+
+    def _resolve_function(self, func_name: str) -> tuple[str | None, bool]:
+        """Map a call's dotted name to an analyzed function.
+
+        Returns ``(qualified_name, bound)``. ``bound`` is True when the call's
+        receiver must be passed as the implicit first parameter (``self`` or
+        ``cls``), as in ``self.method(x)``.
+        """
+        if func_name in self.functions:
+            # Module-level function, or an explicit ``Class.method(...)`` call.
+            # ``Class.classmethod(...)`` still binds ``cls`` implicitly.
+            fn = self.functions[func_name]
+            bound = (self._function_class.get(func_name) is not None
+                     and "classmethod" in self._decorator_names(fn))
+            return func_name, bound
+        current_class = self._class_stack[-1] if self._class_stack else None
+        prefix, _, method = func_name.partition(".")
+        if current_class and prefix in {"self", "cls"} and method and "." not in method:
+            qualified = f"{current_class}.{method}"
+            if qualified in self.functions:
+                fn = self.functions[qualified]
+                bound = "staticmethod" not in self._decorator_names(fn)
+                return qualified, bound
+        return None, False
 
     def _invoke_function(self, name: str, call: ast.Call,
                          positional_taints: list[set[str]],
@@ -324,10 +375,12 @@ class TaintAnalyzer:
         self._called_functions.add(name)
         self._active_calls.add(name)
         self._return_stack.append(set())
+        self._class_stack.append(self._function_class.get(name))
         try:
             self._exec_block(fn.body)
             result = set(self._return_stack[-1])
         finally:
+            self._class_stack.pop()
             self._return_stack.pop()
             self._active_calls.remove(name)
             self.env = caller_env

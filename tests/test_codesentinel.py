@@ -310,6 +310,114 @@ def dormant():
 """)
         self.assertEqual([f.rule_id for f in findings], ["CS-SQL-001"])
 
+    # Method calls: the receiver object carries taint.
+    def test_method_on_tainted_variable_preserves_taint(self):
+        findings = self.analyze("""
+import os
+value = input()
+os.system(value.strip())
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-CMD-001"])
+
+    def test_method_chained_on_source_preserves_taint(self):
+        findings = self.analyze("""
+value = input().strip().lower()
+cursor.execute("SELECT * FROM users WHERE name='" + value)
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-SQL-001"])
+
+    def test_str_format_on_tainted_template_preserves_taint(self):
+        findings = self.analyze("""
+template = input()
+cursor.execute(template.format("x"))
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-SQL-001"])
+
+    def test_method_on_clean_value_is_not_flagged(self):
+        self.assertEqual(self.analyze("""
+import os
+value = "hello"
+os.system("echo " + value.upper())
+"""), [])
+
+    def test_method_on_sanitized_value_stays_sanitized(self):
+        self.assertEqual(self.analyze("""
+import os
+import shlex
+value = input()
+os.system("echo " + shlex.quote(value).strip())
+"""), [])
+
+    def test_sink_nested_in_method_receiver_is_detected(self):
+        findings = self.analyze("""
+import os
+output = os.popen(input()).read()
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-CMD-001"])
+
+    # Class methods.
+    def test_source_inside_uncalled_method_is_detected(self):
+        findings = self.analyze("""
+import os
+class Runner:
+    def run(self):
+        os.system(input())
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-CMD-001"])
+
+    def test_self_method_call_propagates_argument_taint(self):
+        findings = self.analyze("""
+import os
+class Runner:
+    def handle(self):
+        self.execute(input())
+    def execute(self, command):
+        os.system(command)
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-CMD-001"])
+
+    def test_self_method_return_propagates_taint(self):
+        findings = self.analyze("""
+class Repo:
+    def read_name(self):
+        return input()
+    def find(self):
+        cursor.execute("SELECT * FROM users WHERE name='" + self.read_name())
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-SQL-001"])
+
+    def test_self_method_with_clean_argument_is_not_flagged(self):
+        self.assertEqual(self.analyze("""
+import os
+class Runner:
+    def handle(self):
+        self.execute("echo hello")
+    def execute(self, command):
+        os.system(command)
+"""), [])
+
+    def test_staticmethod_called_via_self_does_not_shift_arguments(self):
+        findings = self.analyze("""
+import os
+class Runner:
+    def handle(self):
+        self.execute(input())
+    @staticmethod
+    def execute(command):
+        os.system(command)
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-CMD-001"])
+
+    def test_explicit_class_method_call_from_module_level(self):
+        findings = self.analyze("""
+import os
+class Tools:
+    @staticmethod
+    def run(command):
+        os.system(command)
+Tools.run(input())
+""")
+        self.assertEqual([f.rule_id for f in findings], ["CS-CMD-001"])
 
 
 if __name__ == "__main__":
