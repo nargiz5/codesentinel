@@ -1,0 +1,110 @@
+{
+  "description": "Known CVEs scanned in a vulnerable and a fixed version with CodeSentinel, CodeQL 2.27.6 (python-security-extended) and Semgrep CE 1.187.0 (the python/ rules of semgrep-rules at a5ad171, audit rules included). 'found' means an alert at the vulnerable sink with a correct source; an 'audit rule' alert flags the API wherever it is used, without a source; 'fixed_version' says whether the alert disappears after the fix.",
+  "cves": [
+    {
+      "id": "CVE-2024-3116",
+      "project": "pgAdmin 4",
+      "repo_url": "https://github.com/pgadmin-org/pgadmin4",
+      "vulnerable": "REL-8_4",
+      "fixed": "REL-8_5",
+      "scan_dir": "web/pgadmin",
+      "class": "command injection",
+      "codesentinel": {
+        "vulnerable": "found: utils/__init__.py:350, source request.data in misc/__init__.py",
+        "fixed_version": "still reported (utils/__init__.py:358): the fix adds path checks the analyzer does not recognize"
+      },
+      "codeql": {
+        "vulnerable": "found: utils/__init__.py:351, source in misc/__init__.py",
+        "fixed_version": "still reported (utils/__init__.py:359)"
+      },
+      "semgrep": {
+        "vulnerable": "audit rule only: dangerous-subprocess-use-audit at utils/__init__.py:350 (flags any non-literal subprocess call; no source)",
+        "fixed_version": "same audit alert (utils/__init__.py:358)"
+      }
+    },
+    {
+      "id": "CVE-2024-2044",
+      "project": "pgAdmin 4",
+      "repo_url": "https://github.com/pgadmin-org/pgadmin4",
+      "vulnerable": "REL-8_3",
+      "fixed": "REL-8_4",
+      "scan_dir": "web/pgadmin",
+      "class": "path traversal leading to unsafe deserialization",
+      "codesentinel": {
+        "vulnerable": "missed: the session id comes from a cookie and reaches open() and pickle.load() through method calls on a session-manager object, which the analyzer does not resolve",
+        "fixed_version": "n/a"
+      },
+      "codeql": {
+        "vulnerable": "found the path traversal: utils/session.py:196, 230, 232 (not reported as deserialization)",
+        "fixed_version": "gone"
+      },
+      "semgrep": {
+        "vulnerable": "audit rule only: avoid-pickle at utils/session.py:233 (flags every pickle use; no source)",
+        "fixed_version": "same audit alert (utils/session.py:238)"
+      }
+    },
+    {
+      "id": "CVE-2022-0339",
+      "project": "calibre-web",
+      "repo_url": "https://github.com/janeczku/calibre-web",
+      "vulnerable": "0.6.15",
+      "fixed": "0.6.16",
+      "scan_dir": "cps",
+      "class": "SSRF",
+      "codesentinel": {
+        "vulnerable": "found: helper.py:588 requests.get in save_cover_from_url, source request.form in another module",
+        "fixed_version": "still reported (helper.py:593): the fix is a localhost check the analyzer does not recognize"
+      },
+      "codeql": {
+        "vulnerable": "missed",
+        "fixed_version": "n/a"
+      },
+      "semgrep": {
+        "vulnerable": "missed: no alert at helper.py:588",
+        "fixed_version": "n/a"
+      }
+    },
+    {
+      "id": "CVE-2024-32651",
+      "project": "changedetection.io",
+      "repo_url": "https://github.com/dgtlmoon/changedetection.io",
+      "vulnerable": "0.45.20",
+      "fixed": "0.45.21",
+      "scan_dir": "changedetectionio",
+      "class": "server-side template injection",
+      "codesentinel": {
+        "vulnerable": "missed: the template comes from a WTForms field (field.data), not a recognized source, and Environment(...).from_string is not a recognized sink",
+        "fixed_version": "n/a"
+      },
+      "codeql": {
+        "vulnerable": "missed",
+        "fixed_version": "n/a"
+      },
+      "semgrep": {
+        "vulnerable": "audit rules only: direct-use-of-jinja2 and missing-autoescape-disabled where the Environment is created (notification.py:126, forms.py:244); these are XSS/autoescape checks, not template injection",
+        "fixed_version": "gone (the code no longer creates that Environment)"
+      }
+    },
+    {
+      "id": "CVE-2025-57633",
+      "project": "FTP-Flask-python",
+      "repo_url": "https://github.com/ajaypp123/FTP-Flask-python",
+      "vulnerable": "5173b6828244ff9729fa29cc144d74ccbea30a73",
+      "fixed": null,
+      "scan_dir": ".",
+      "class": "command injection",
+      "codesentinel": {
+        "vulnerable": "found: ftp_app.py:34 os.system, source request.form",
+        "fixed_version": "no fixed version (project unmaintained)"
+      },
+      "codeql": {
+        "vulnerable": "found: ftp_app.py:34",
+        "fixed_version": "no fixed version"
+      },
+      "semgrep": {
+        "vulnerable": "found: dangerous-system-call (a taint rule) at ftp_app.py:34",
+        "fixed_version": "no fixed version"
+      }
+    }
+  ]
+}

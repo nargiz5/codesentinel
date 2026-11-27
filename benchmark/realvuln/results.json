@@ -1,0 +1,756 @@
+{
+ "realvuln-damn-vulnerable-flask-application": {
+  "codesentinel": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 11,
+   "found_cov": 2,
+   "vulns_cov": 4
+  },
+  "codesentinel_low": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 11,
+   "found_cov": 2,
+   "vulns_cov": 4
+  },
+  "semgrep": {
+   "findings": 21,
+   "tp_findings": 8,
+   "fp": 13,
+   "found": 3,
+   "vulns": 11,
+   "found_cov": 3,
+   "vulns_cov": 4
+  }
+ },
+ "realvuln-damn-vulnerable-graphql-application": {
+  "codesentinel": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 36,
+   "found_cov": 0,
+   "vulns_cov": 9
+  },
+  "codesentinel_low": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 36,
+   "found_cov": 0,
+   "vulns_cov": 9
+  },
+  "semgrep": {
+   "findings": 9,
+   "tp_findings": 2,
+   "fp": 7,
+   "found": 2,
+   "vulns": 36,
+   "found_cov": 1,
+   "vulns_cov": 9
+  }
+ },
+ "realvuln-djangoat": {
+  "codesentinel": {
+   "findings": 8,
+   "tp_findings": 5,
+   "fp": 3,
+   "found": 5,
+   "vulns": 52,
+   "found_cov": 5,
+   "vulns_cov": 16
+  },
+  "codesentinel_low": {
+   "findings": 8,
+   "tp_findings": 5,
+   "fp": 3,
+   "found": 5,
+   "vulns": 52,
+   "found_cov": 5,
+   "vulns_cov": 16
+  },
+  "semgrep": {
+   "findings": 49,
+   "tp_findings": 16,
+   "fp": 33,
+   "found": 11,
+   "vulns": 52,
+   "found_cov": 8,
+   "vulns_cov": 16
+  }
+ },
+ "realvuln-dsvpwa": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 32,
+   "found_cov": 1,
+   "vulns_cov": 13
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 32,
+   "found_cov": 1,
+   "vulns_cov": 13
+  },
+  "semgrep": {
+   "findings": 13,
+   "tp_findings": 8,
+   "fp": 5,
+   "found": 6,
+   "vulns": 32,
+   "found_cov": 6,
+   "vulns_cov": 13
+  }
+ },
+ "realvuln-dsvw": {
+  "codesentinel": {
+   "findings": 10,
+   "tp_findings": 8,
+   "fp": 2,
+   "found": 8,
+   "vulns": 27,
+   "found_cov": 8,
+   "vulns_cov": 13
+  },
+  "codesentinel_low": {
+   "findings": 10,
+   "tp_findings": 8,
+   "fp": 2,
+   "found": 8,
+   "vulns": 27,
+   "found_cov": 8,
+   "vulns_cov": 13
+  },
+  "semgrep": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 27,
+   "found_cov": 0,
+   "vulns_cov": 13
+  }
+ },
+ "realvuln-dvblab": {
+  "codesentinel": {
+   "findings": 5,
+   "tp_findings": 5,
+   "fp": 0,
+   "found": 5,
+   "vulns": 22,
+   "found_cov": 5,
+   "vulns_cov": 5
+  },
+  "codesentinel_low": {
+   "findings": 5,
+   "tp_findings": 5,
+   "fp": 0,
+   "found": 5,
+   "vulns": 22,
+   "found_cov": 5,
+   "vulns_cov": 5
+  },
+  "semgrep": {
+   "findings": 30,
+   "tp_findings": 16,
+   "fp": 14,
+   "found": 8,
+   "vulns": 22,
+   "found_cov": 5,
+   "vulns_cov": 5
+  }
+ },
+ "realvuln-dvpwa": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 23,
+   "found_cov": 1,
+   "vulns_cov": 9
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 23,
+   "found_cov": 1,
+   "vulns_cov": 9
+  },
+  "semgrep": {
+   "findings": 10,
+   "tp_findings": 3,
+   "fp": 7,
+   "found": 2,
+   "vulns": 23,
+   "found_cov": 1,
+   "vulns_cov": 9
+  }
+ },
+ "realvuln-extremely-vulnerable-flask-app": {
+  "codesentinel": {
+   "findings": 3,
+   "tp_findings": 3,
+   "fp": 0,
+   "found": 3,
+   "vulns": 32,
+   "found_cov": 3,
+   "vulns_cov": 10
+  },
+  "codesentinel_low": {
+   "findings": 3,
+   "tp_findings": 3,
+   "fp": 0,
+   "found": 3,
+   "vulns": 32,
+   "found_cov": 3,
+   "vulns_cov": 10
+  },
+  "semgrep": {
+   "findings": 14,
+   "tp_findings": 7,
+   "fp": 7,
+   "found": 6,
+   "vulns": 32,
+   "found_cov": 2,
+   "vulns_cov": 10
+  }
+ },
+ "realvuln-flask-xss": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 30,
+   "found_cov": 1,
+   "vulns_cov": 10
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 30,
+   "found_cov": 1,
+   "vulns_cov": 10
+  },
+  "semgrep": {
+   "findings": 4,
+   "tp_findings": 4,
+   "fp": 0,
+   "found": 3,
+   "vulns": 30,
+   "found_cov": 1,
+   "vulns_cov": 10
+  }
+ },
+ "realvuln-insecure-web": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 9,
+   "found_cov": 1,
+   "vulns_cov": 3
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 9,
+   "found_cov": 1,
+   "vulns_cov": 3
+  },
+  "semgrep": {
+   "findings": 16,
+   "tp_findings": 12,
+   "fp": 4,
+   "found": 4,
+   "vulns": 9,
+   "found_cov": 2,
+   "vulns_cov": 3
+  }
+ },
+ "realvuln-intentionally-vulnerable-python-application": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 7,
+   "found_cov": 1,
+   "vulns_cov": 4
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 7,
+   "found_cov": 1,
+   "vulns_cov": 4
+  },
+  "semgrep": {
+   "findings": 5,
+   "tp_findings": 3,
+   "fp": 2,
+   "found": 2,
+   "vulns": 7,
+   "found_cov": 1,
+   "vulns_cov": 4
+  }
+ },
+ "realvuln-lets-be-bad-guys": {
+  "codesentinel": {
+   "findings": 4,
+   "tp_findings": 4,
+   "fp": 0,
+   "found": 3,
+   "vulns": 24,
+   "found_cov": 3,
+   "vulns_cov": 9
+  },
+  "codesentinel_low": {
+   "findings": 4,
+   "tp_findings": 4,
+   "fp": 0,
+   "found": 3,
+   "vulns": 24,
+   "found_cov": 3,
+   "vulns_cov": 9
+  },
+  "semgrep": {
+   "findings": 17,
+   "tp_findings": 10,
+   "fp": 7,
+   "found": 8,
+   "vulns": 24,
+   "found_cov": 3,
+   "vulns_cov": 9
+  }
+ },
+ "realvuln-owasp-web-playground": {
+  "codesentinel": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 28,
+   "found_cov": 0,
+   "vulns_cov": 7
+  },
+  "codesentinel_low": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 28,
+   "found_cov": 0,
+   "vulns_cov": 7
+  },
+  "semgrep": {
+   "findings": 110,
+   "tp_findings": 10,
+   "fp": 100,
+   "found": 6,
+   "vulns": 28,
+   "found_cov": 4,
+   "vulns_cov": 7
+  }
+ },
+ "realvuln-pygoat": {
+  "codesentinel": {
+   "findings": 10,
+   "tp_findings": 9,
+   "fp": 1,
+   "found": 9,
+   "vulns": 78,
+   "found_cov": 9,
+   "vulns_cov": 24
+  },
+  "codesentinel_low": {
+   "findings": 10,
+   "tp_findings": 9,
+   "fp": 1,
+   "found": 9,
+   "vulns": 78,
+   "found_cov": 9,
+   "vulns_cov": 24
+  },
+  "semgrep": {
+   "findings": 133,
+   "tp_findings": 39,
+   "fp": 94,
+   "found": 25,
+   "vulns": 78,
+   "found_cov": 12,
+   "vulns_cov": 24
+  }
+ },
+ "realvuln-python-app": {
+  "codesentinel": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 21,
+   "found_cov": 2,
+   "vulns_cov": 10
+  },
+  "codesentinel_low": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 21,
+   "found_cov": 2,
+   "vulns_cov": 10
+  },
+  "semgrep": {
+   "findings": 40,
+   "tp_findings": 0,
+   "fp": 40,
+   "found": 0,
+   "vulns": 21,
+   "found_cov": 0,
+   "vulns_cov": 10
+  }
+ },
+ "realvuln-python-insecure-app": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 8,
+   "found_cov": 1,
+   "vulns_cov": 4
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 8,
+   "found_cov": 1,
+   "vulns_cov": 4
+  },
+  "semgrep": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 8,
+   "found_cov": 0,
+   "vulns_cov": 4
+  }
+ },
+ "realvuln-pythonssti": {
+  "codesentinel": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 2,
+   "found_cov": 0,
+   "vulns_cov": 2
+  },
+  "codesentinel_low": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 2,
+   "found_cov": 0,
+   "vulns_cov": 2
+  },
+  "semgrep": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 2,
+   "found_cov": 1,
+   "vulns_cov": 2
+  }
+ },
+ "realvuln-threatbyte": {
+  "codesentinel": {
+   "findings": 2,
+   "tp_findings": 1,
+   "fp": 1,
+   "found": 1,
+   "vulns": 26,
+   "found_cov": 1,
+   "vulns_cov": 6
+  },
+  "codesentinel_low": {
+   "findings": 2,
+   "tp_findings": 1,
+   "fp": 1,
+   "found": 1,
+   "vulns": 26,
+   "found_cov": 1,
+   "vulns_cov": 6
+  },
+  "semgrep": {
+   "findings": 17,
+   "tp_findings": 4,
+   "fp": 13,
+   "found": 3,
+   "vulns": 26,
+   "found_cov": 1,
+   "vulns_cov": 6
+  }
+ },
+ "realvuln-vampi": {
+  "codesentinel": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 15,
+   "found_cov": 0,
+   "vulns_cov": 1
+  },
+  "codesentinel_low": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 15,
+   "found_cov": 0,
+   "vulns_cov": 1
+  },
+  "semgrep": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 15,
+   "found_cov": 0,
+   "vulns_cov": 1
+  }
+ },
+ "realvuln-vfapi": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 0,
+   "fp": 1,
+   "found": 0,
+   "vulns": 9,
+   "found_cov": 0,
+   "vulns_cov": 5
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 0,
+   "fp": 1,
+   "found": 0,
+   "vulns": 9,
+   "found_cov": 0,
+   "vulns_cov": 5
+  },
+  "semgrep": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 9,
+   "found_cov": 0,
+   "vulns_cov": 5
+  }
+ },
+ "realvuln-vulnerable-api": {
+  "codesentinel": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 14,
+   "found_cov": 0,
+   "vulns_cov": 8
+  },
+  "codesentinel_low": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 14,
+   "found_cov": 0,
+   "vulns_cov": 8
+  },
+  "semgrep": {
+   "findings": 10,
+   "tp_findings": 6,
+   "fp": 4,
+   "found": 4,
+   "vulns": 14,
+   "found_cov": 2,
+   "vulns_cov": 8
+  }
+ },
+ "realvuln-vulnerable-flask-app": {
+  "codesentinel": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 21,
+   "found_cov": 1,
+   "vulns_cov": 4
+  },
+  "codesentinel_low": {
+   "findings": 1,
+   "tp_findings": 1,
+   "fp": 0,
+   "found": 1,
+   "vulns": 21,
+   "found_cov": 1,
+   "vulns_cov": 4
+  },
+  "semgrep": {
+   "findings": 14,
+   "tp_findings": 4,
+   "fp": 10,
+   "found": 3,
+   "vulns": 21,
+   "found_cov": 2,
+   "vulns_cov": 4
+  }
+ },
+ "realvuln-vulnerable-python-apps": {
+  "codesentinel": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 22,
+   "found_cov": 2,
+   "vulns_cov": 11
+  },
+  "codesentinel_low": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 22,
+   "found_cov": 2,
+   "vulns_cov": 11
+  },
+  "semgrep": {
+   "findings": 12,
+   "tp_findings": 2,
+   "fp": 10,
+   "found": 2,
+   "vulns": 22,
+   "found_cov": 2,
+   "vulns_cov": 11
+  }
+ },
+ "realvuln-vulnerable-tornado-app": {
+  "codesentinel": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 14,
+   "found_cov": 0,
+   "vulns_cov": 5
+  },
+  "codesentinel_low": {
+   "findings": 0,
+   "tp_findings": 0,
+   "fp": 0,
+   "found": 0,
+   "vulns": 14,
+   "found_cov": 0,
+   "vulns_cov": 5
+  },
+  "semgrep": {
+   "findings": 9,
+   "tp_findings": 1,
+   "fp": 8,
+   "found": 1,
+   "vulns": 14,
+   "found_cov": 1,
+   "vulns_cov": 5
+  }
+ },
+ "realvuln-vulnpy": {
+  "codesentinel": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 80,
+   "found_cov": 2,
+   "vulns_cov": 48
+  },
+  "codesentinel_low": {
+   "findings": 2,
+   "tp_findings": 2,
+   "fp": 0,
+   "found": 2,
+   "vulns": 80,
+   "found_cov": 2,
+   "vulns_cov": 48
+  },
+  "semgrep": {
+   "findings": 35,
+   "tp_findings": 14,
+   "fp": 21,
+   "found": 9,
+   "vulns": 80,
+   "found_cov": 8,
+   "vulns_cov": 48
+  }
+ },
+ "realvuln-vulpy": {
+  "codesentinel": {
+   "findings": 3,
+   "tp_findings": 3,
+   "fp": 0,
+   "found": 3,
+   "vulns": 57,
+   "found_cov": 3,
+   "vulns_cov": 12
+  },
+  "codesentinel_low": {
+   "findings": 4,
+   "tp_findings": 3,
+   "fp": 1,
+   "found": 3,
+   "vulns": 57,
+   "found_cov": 3,
+   "vulns_cov": 12
+  },
+  "semgrep": {
+   "findings": 45,
+   "tp_findings": 22,
+   "fp": 23,
+   "found": 16,
+   "vulns": 57,
+   "found_cov": 6,
+   "vulns_cov": 12
+  }
+ }
+}

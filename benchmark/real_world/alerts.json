@@ -1,0 +1,229 @@
+{
+ "description": "Every CodeSentinel alert on four open-source Flask applications, reviewed by hand. label: false_positive (the code protects itself) or needs_review (a product decision).",
+ "projects": {
+  "CTFd": {
+   "repo_url": "https://github.com/CTFd/CTFd",
+   "commit": "f9fa28b2f17b22ec6c631a5b745f47573966f7f2",
+   "scan_dir": "CTFd",
+   "alerts": [
+    {
+     "file": "CTFd/admin/__init__.py",
+     "line": 95,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Plugin name must be in the list of installed plugins (if plugin in config_html_plugins)"
+    },
+    {
+     "file": "CTFd/admin/__init__.py",
+     "line": 98,
+     "rule": "CS-SSTI-001",
+     "label": "false_positive",
+     "reason": "Template is a file of an installed plugin, selected through the same allow-list"
+    },
+    {
+     "file": "CTFd/auth.py",
+     "line": 402,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by validators.is_safe_url(next)"
+    },
+    {
+     "file": "CTFd/auth.py",
+     "line": 490,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by validators.is_safe_url(next)"
+    }
+   ]
+  },
+  "flaskbb": {
+   "repo_url": "https://github.com/flaskbb/flaskbb",
+   "commit": "63afaa41d6e012a917aa615efcda55531577c3b6",
+   "scan_dir": "flaskbb",
+   "alerts": [
+    {
+     "file": "flaskbb/utils/helpers.py",
+     "line": 125,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "redirect_url() returns the first candidate that is safe for ALLOWED_HOSTS"
+    },
+    {
+     "file": "flaskbb/utils/helpers.py",
+     "line": 167,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "redirect_url() returns the first candidate that is safe for ALLOWED_HOSTS"
+    }
+   ]
+  },
+  "pgadmin4": {
+   "repo_url": "https://github.com/pgadmin-org/pgadmin4",
+   "commit": "fefe3c58221a58689c90d26b3aa5a6144e4f9f67",
+   "scan_dir": "web/pgadmin",
+   "alerts": [
+    {
+     "file": "web/pgadmin/authenticate/mfa/views.py",
+     "line": 118,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by _is_safe_redirect_url()"
+    },
+    {
+     "file": "web/pgadmin/authenticate/mfa/views.py",
+     "line": 138,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by _is_safe_redirect_url()"
+    },
+    {
+     "file": "web/pgadmin/authenticate/mfa/views.py",
+     "line": 289,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by _is_safe_redirect_url()"
+    },
+    {
+     "file": "web/pgadmin/authenticate/mfa/views.py",
+     "line": 380,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Redirects to an internal login URL built by login_url()"
+    },
+    {
+     "file": "web/pgadmin/llm/__init__.py",
+     "line": 800,
+     "rule": "CS-SSRF-001",
+     "label": "needs_review",
+     "reason": "Checked by validate_api_url() against ALLOWED_LLM_API_URLS; the default list also allows http://localhost on any port, so a logged-in user can make the server contact local services. Whether that is acceptable is a product decision."
+    },
+    {
+     "file": "web/pgadmin/llm/__init__.py",
+     "line": 875,
+     "rule": "CS-SSRF-001",
+     "label": "needs_review",
+     "reason": "Checked by validate_api_url() against ALLOWED_LLM_API_URLS; the default list also allows http://localhost on any port, so a logged-in user can make the server contact local services. Whether that is acceptable is a product decision."
+    },
+    {
+     "file": "web/pgadmin/llm/__init__.py",
+     "line": 940,
+     "rule": "CS-SSRF-001",
+     "label": "needs_review",
+     "reason": "Checked by validate_api_url() against ALLOWED_LLM_API_URLS; the default list also allows http://localhost on any port, so a logged-in user can make the server contact local services. Whether that is acceptable is a product decision."
+    },
+    {
+     "file": "web/pgadmin/llm/__init__.py",
+     "line": 1001,
+     "rule": "CS-SSRF-001",
+     "label": "needs_review",
+     "reason": "Checked by validate_api_url() against ALLOWED_LLM_API_URLS; the default list also allows http://localhost on any port, so a logged-in user can make the server contact local services. Whether that is acceptable is a product decision."
+    },
+    {
+     "file": "web/pgadmin/misc/cloud/google/__init__.py",
+     "line": 125,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Path passed through filename_with_file_manager_path()"
+    },
+    {
+     "file": "web/pgadmin/misc/file_manager/__init__.py",
+     "line": 434,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Path checked by the project's own validators (storage directory / file-manager path)"
+    },
+    {
+     "file": "web/pgadmin/misc/file_manager/__init__.py",
+     "line": 1589,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Path checked by the project's own validators (storage directory / file-manager path)"
+    },
+    {
+     "file": "web/pgadmin/settings/__init__.py",
+     "line": 563,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Path checked by the project's own validators (storage directory / file-manager path)"
+    },
+    {
+     "file": "web/pgadmin/utils/__init__.py",
+     "line": 845,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Path checked by the project's own validators (storage directory / file-manager path)"
+    },
+    {
+     "file": "web/pgadmin/utils/__init__.py",
+     "line": 982,
+     "rule": "CS-CMD-001",
+     "label": "false_positive",
+     "reason": "Binary path rejected if inside a user-writable storage directory; only fixed utility names are run"
+    },
+    {
+     "file": "web/pgadmin/utils/__init__.py",
+     "line": 1171,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Command-line setup path, otherwise filename_with_file_manager_path()"
+    },
+    {
+     "file": "web/pgadmin/utils/__init__.py",
+     "line": 1377,
+     "rule": "CS-PATH-001",
+     "label": "false_positive",
+     "reason": "Command-line setup path, otherwise filename_with_file_manager_path()"
+    }
+   ]
+  },
+  "redash": {
+   "repo_url": "https://github.com/getredash/redash",
+   "commit": "f561a53dc55eeb3f20615be951560dc78bb23f4c",
+   "scan_dir": "redash",
+   "alerts": [
+    {
+     "file": "redash/authentication/google_oauth.py",
+     "line": 144,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by get_next_path()"
+    },
+    {
+     "file": "redash/authentication/ldap_auth.py",
+     "line": 43,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by get_next_path()"
+    },
+    {
+     "file": "redash/authentication/ldap_auth.py",
+     "line": 57,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by get_next_path()"
+    },
+    {
+     "file": "redash/authentication/remote_user_auth.py",
+     "line": 51,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by get_next_path()"
+    },
+    {
+     "file": "redash/handlers/authentication.py",
+     "line": 203,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by get_next_path()"
+    },
+    {
+     "file": "redash/handlers/authentication.py",
+     "line": 212,
+     "rule": "CS-REDIRECT-001",
+     "label": "false_positive",
+     "reason": "Guarded by get_next_path()"
+    }
+   ]
+  }
+ }
+}

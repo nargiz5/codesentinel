@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codesentinel"
+version = "0.3.0"
+description = "Interprocedural taint analyzer for Python web applications"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Nargiz Bakhshaliyeva" }]
+requires-python = ">=3.10"
+dependencies = []
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Topic :: Security",
+    "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.urls]
+Homepage = "https://github.com/nargiz5/codesentinel"
+
+[project.scripts]
+codesentinel = "codesentinel:main"
+sentinel-ai = "sentinel_ai:main"
+
+[tool.setuptools]
+py-modules = ["codesentinel", "sentinel_ai"]

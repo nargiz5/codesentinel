@@ -1,0 +1,6 @@
+- id: codesentinel
+  name: CodeSentinel taint analysis
+  description: Report untrusted data reaching SQL, shell, eval, deserialization, file, SSRF, template and redirect sinks
+  entry: codesentinel
+  language: python
+  types: [python]

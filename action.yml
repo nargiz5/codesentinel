@@ -1,0 +1,34 @@
+name: CodeSentinel
+description: Taint analysis for Python web code, with SARIF output for GitHub code scanning
+branding:
+  icon: shield
+  color: blue
+inputs:
+  paths:
+    description: Files or directories to scan (space-separated)
+    default: "."
+  sarif-file:
+    description: Where to write the SARIF log
+    default: codesentinel.sarif
+  args:
+    description: Extra arguments, e.g. --include-low-confidence
+    default: ""
+outputs:
+  sarif-file:
+    description: Path of the SARIF log
+    value: ${{ inputs.sarif-file }}
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: "3.12"
+    - name: Run CodeSentinel
+      shell: bash
+      env:
+        CS_PATHS: ${{ inputs.paths }}
+        CS_SARIF: ${{ inputs.sarif-file }}
+        CS_ARGS: ${{ inputs.args }}
+      run: |
+        # Exit code 1 only means "findings"; alerts are shown in code scanning.
+        python "$GITHUB_ACTION_PATH/codesentinel.py" $CS_PATHS $CS_ARGS --sarif > "$CS_SARIF" || [ $? -eq 1 ]
